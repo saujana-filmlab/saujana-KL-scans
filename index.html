@@ -3,8 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Scans are Ready - Saujana Film Lab KL</title>
+  <title>Your Scans are Ready — Saujana Film Lab KL</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- WhatsApp / Social Media Preview Tags -->
+  <meta property="og:title" content="Your scans are done! 🎞️" />
+  <meta property="og:description" content="Fresh from our scanner, delivered to you!" />
+  <meta property="og:image" content="https://scans.saujanalab.com/gb-icon.png" />
+  <meta property="og:image:secure_url" content="https://scans.saujanalab.com/gb-icon.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scans.saujanalab.com/" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Your scans are done! 🎞️" />
+  <meta name="twitter:description" content="Fresh from our scanner, delivered to you!" />
+  <meta name="twitter:image" content="https://scans.saujanalab.com/gb-icon.png" />
+  <link rel="stylesheet" href="kl-delivery.css" />
+  <script>
+    (() => {
+      const previewParams = new URLSearchParams(window.location.search);
+      document.documentElement.dataset.deliveryTheme = 'bali';
+      const requestedTheme = previewParams.get('negative');
+      document.documentElement.dataset.negative =
+        requestedTheme === 'bw' || requestedTheme === 'classic' ? requestedTheme : 'colour';
+      if (previewParams.get('preview') === '1') {
+        document.documentElement.dataset.themePreview = 'true';
+      }
+    })();
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -409,12 +438,66 @@
       .message-block { padding: 24px; font-size: 16px; }
       .action-grid { grid-template-columns: 1fr; }
     }
+
+    /* Bali-derived delivery refinements */
+    .page { max-width: 1040px; }
+    .logo-wrap img {
+      display: block;
+      width: 260px;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+    }
+    .ready-card { padding: 58px 52px; }
+    .btn-download {
+      width: 100%; justify-content: center; gap: 12px;
+      background: #d19a2a; color: #0a0a0a;
+      box-shadow: 0 8px 22px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.24);
+    }
+    .btn-download::before { background: #e0aa3e; }
+    .btn-download.is-disabled {
+      opacity: .48;
+      cursor: wait;
+      pointer-events: none;
+      box-shadow: none;
+    }
+    .button-image-icon { width: 24px; height: 24px; object-fit: contain; flex: 0 0 24px; position: relative; z-index: 1; }
+
   </style>
 </head>
 <body>
+  <svg aria-hidden="true" focusable="false" width="0" height="0"
+       style="position:absolute;width:0;height:0;overflow:hidden">
+    <filter id="logo-colour-tint" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 1
+        0 0 0 0 0.392157
+        0 0 0 0 0.145098
+        0 0 0 1 0" />
+    </filter>
+    <filter id="logo-classic-tint" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 0.788235
+        0 0 0 0 0.631373
+        0 0 0 0 0.360784
+        0 0 0 1 0" />
+    </filter>
+  </svg>
+  <nav class="theme-preview-switch" aria-label="Delivery theme preview">
+    <span>Negative preview</span>
+    <a href="?theme=bali&negative=colour&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Colour</a>
+    <a href="?theme=bali&negative=bw&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kentmere%20400%20%C3%97%206&link=%23&sheets=0">B&amp;W</a>
+    <a href="?theme=bali&negative=classic&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Classic</a>
+  </nav>
 
   <!-- top film strip -->
-  <div class="sprocket-strip">
+  <div class="sprocket-strip sprocket-strip-top">
+    <div class="bali-film-meta" aria-hidden="true">
+      <span>SAUJANA FILM LAB KL</span>
+      <span>36 <b>▶</b></span>
+      <span class="bali-negative-label"></span>
+      <span class="bali-process-label"></span>
+    </div>
     <div class="sprocket-hole"></div>
     <div class="sprocket-hole"></div>
     <div class="sprocket-hole"></div>
@@ -435,6 +518,9 @@
 
     <!-- header -->
     <div class="header">
+      <div class="bali-header-meta" aria-hidden="true">
+        <span>ROLL 01 / KUALA LUMPUR</span>
+      </div>
       <div class="logo-wrap">
         <img src="saujana-logo.png" alt="Saujana Film Lab Kuala Lumpur"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
@@ -443,6 +529,7 @@
           Saujana <span style="font-style:normal; font-size:14px; letter-spacing:0.3em; font-weight:400; vertical-align:middle; color:var(--muted);">FILM LAB KL</span>
         </div>
       </div>
+      <p class="bali-header-services">DEVELOPING <span>·</span> SCANNING <span>·</span> FILM SUPPLIES <span>·</span> CAMERAS</p>
     </div>
 
     <!-- ready card -->
@@ -453,13 +540,9 @@
       <p class="ready-sub"><!-- FILM INFO -->Portra 400 · 35mm · 36 exp<!-- /FILM INFO --></p>
 
       <div class="download-wrap">
-        <a href="DRIVE_LINK_HERE" class="btn-download" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-          <span>Download Scans</span>
+        <a href="#" class="btn-download" target="_blank" rel="noopener" id="download-btn">
+          <span class="download-arrow" aria-hidden="true">↓</span>
+          <span>Download Full-Resolution Scans</span>
         </a>
       </div>
     </div>
@@ -469,7 +552,7 @@
       <span class="notice-icon">⏳</span>
       <p>
         <strong>Your download link is active for 7 days.</strong> Please save your scans before then.
-        Need us to hold onto your negatives? We store them for up to <strong>1 month upon request</strong> - just let us know.
+        Need us to hold onto your negatives? We store them for up to <strong>1 month upon request</strong> — just let us know.
       </p>
     </div>
 
@@ -488,32 +571,44 @@
     <div class="actions">
       <p class="info-label">Stay in touch</p>
       <div class="action-grid">
-        <a href="https://g.page/r/CQ26Yz_3ODHOEAE/review" target="_blank" rel="noopener" class="action-card">
-          <div class="action-icon">⭐</div>
+        <a href="https://g.page/r/CQ26Yz_3ODHOEBM/review" target="_blank" rel="noopener" class="action-card">
+          <div class="action-icon">
+            <span class="legacy-action-icon">⭐</span>
+            <img class="theme-action-icon" src="https://api.iconify.design/simple-icons:google.svg?color=%23000000" alt="" aria-hidden="true" />
+          </div>
           <div class="action-text">
             <p class="action-title">Leave a Review</p>
             <p class="action-sub">Happy with your scans?</p>
           </div>
         </a>
         <a href="https://www.instagram.com/saujanafilmlab" target="_blank" rel="noopener" class="action-card">
-          <div class="action-icon">📷</div>
+          <div class="action-icon">
+            <span class="legacy-action-icon">📷</span>
+            <img class="theme-action-icon" src="https://api.iconify.design/simple-icons:instagram.svg?color=%23000000" alt="" aria-hidden="true" />
+          </div>
           <div class="action-text">
             <p class="action-title">Tag Us</p>
             <p class="action-sub">@saujanafilmlab</p>
           </div>
         </a>
         <a href="https://wa.me/601159348334" target="_blank" rel="noopener" class="action-card">
-          <div class="action-icon">💬</div>
+          <div class="action-icon">
+            <span class="legacy-action-icon">💬</span>
+            <img class="theme-action-icon" src="https://api.iconify.design/simple-icons:whatsapp.svg?color=%23000000" alt="" aria-hidden="true" />
+          </div>
           <div class="action-text">
             <p class="action-title">WhatsApp Us</p>
             <p class="action-sub">Questions about your order</p>
           </div>
         </a>
         <a href="https://maps.app.goo.gl/UV6F17TZtRTTgCM9A" target="_blank" rel="noopener" class="action-card">
-          <div class="action-icon">📍</div>
+          <div class="action-icon">
+            <span class="legacy-action-icon">📍</span>
+            <img class="theme-action-icon" src="https://api.iconify.design/simple-icons:googlemaps.svg?color=%23000000" alt="" aria-hidden="true" />
+          </div>
           <div class="action-text">
             <p class="action-title">Find Us</p>
-            <p class="action-sub">Lorong 1/77a, Imbi</p>
+            <p class="action-sub">Imbi, Kuala Lumpur</p>
           </div>
         </a>
       </div>
@@ -523,12 +618,59 @@
     <div class="footer">
       <p class="footer-text">
         Saujana Film Lab · Kuala Lumpur, Malaysia<br>
-        Develop · Scan · Film Supply · Cameras<br>
-        Working hours: 11am-8pm, closed every Friday<br><br>
+        Develop · Scan · Film Supply · Cameras<br><br>
         <a href="https://maps.app.goo.gl/UV6F17TZtRTTgCM9A" target="_blank" rel="noopener" style="color:var(--dim); text-decoration:none; letter-spacing:0.15em; font-size:9px;">
-          16, Lorong 1/77a, Imbi, 2nd Floor, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia
+          16, Lorong 1/77a, Imbi, 2nd Floor, 55100 Kuala Lumpur
         </a>
       </p>
+      <div class="bali-footer-compact">
+        <div class="bali-footer-signoff">
+          <span>DEVELOPED WITH CARE IN KUALA LUMPUR.</span>
+          <span class="bali-footer-thanks">THANK YOU FOR KEEPING FILM ALIVE.</span>
+          <a href="mailto:hello@saujanalab.com">hello@saujanalab.com</a>
+        </div>
+        <div class="bali-footer-perforation" aria-hidden="true"></div>
+        <div class="bali-footer-film-meta" aria-hidden="true">
+          <span>4 <b>▶</b></span>
+          <span>SAUJANA FILM LAB KL</span>
+          <span class="bali-footer-dots">••••••••••••••••</span>
+          <span>5 <b>▶</b></span>
+        </div>
+      </div>
+      <div class="bali-site-footer">
+        <section class="bali-footer-panel">
+          <p class="bali-footer-index">01 / LOCATION</p>
+          <h2>COME SAY HI.</h2>
+          <p>16, Lorong 1/77a, Imbi, 2nd Floor<br>55100 Kuala Lumpur</p>
+          <a href="https://maps.app.goo.gl/UV6F17TZtRTTgCM9A" target="_blank" rel="noopener">OPEN IN MAPS ↗</a>
+        </section>
+        <section class="bali-footer-panel">
+          <p class="bali-footer-index">02 / HOURS</p>
+          <h2>ROLL IN.</h2>
+          <dl>
+            <div><dt>MONDAY—SATURDAY</dt><dd>11:00—20:00</dd></div>
+            <div><dt>FRIDAY</dt><dd>CLOSED</dd></div>
+          </dl>
+        </section>
+        <section class="bali-footer-panel">
+          <p class="bali-footer-index">03 / SERVICES</p>
+          <h2>FILM IN.<br>FILES OUT.</h2>
+          <ul>
+            <li><span>DEVELOPING</span><span>C-41 / B&amp;W</span></li>
+            <li><span>SCANNING</span><span>35MM / 120</span></li>
+            <li><span>FILM SUPPLIES</span><span>IN STORE</span></li>
+          </ul>
+        </section>
+        <section class="bali-footer-panel">
+          <p class="bali-footer-index">04 / CONTACT</p>
+          <h2>STAY IN<br>THE LOOP.</h2>
+          <ul>
+            <li><span>WHATSAPP</span><a href="https://wa.me/601159348334" target="_blank" rel="noopener">+60 11-5934 8334 ↗</a></li>
+            <li><span>INSTAGRAM</span><a href="https://www.instagram.com/saujanafilmlab" target="_blank" rel="noopener">@SAUJANAFILMLAB ↗</a></li>
+            <li><span>WEBSITE</span><a href="https://saujanalab.com/" target="_blank" rel="noopener">SAUJANALAB.COM ↗</a></li>
+          </ul>
+        </section>
+      </div>
     </div>
 
     <!-- bottom film strip -->
@@ -551,31 +693,58 @@
   </div>
 
 
-  <script>
-    (function() {
-      const params = new URLSearchParams(window.location.search);
-      const order = params.get('order');
+    <script>
+    const SHEETS_API = "https://script.google.com/macros/s/AKfycbxEw_UH2VX2nDF--Ic8O33DBPRipp6fB46BH5Gb1xYSrP5WpAdOSi1X1p4OuD-GV55H/exec";
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const order = String(params.get('order') || '').trim();
       const name = params.get('name');
       const film = params.get('film');
       const link = params.get('link');
+      const notesFromUrl = params.get('notes');
+      const deliveryDate = params.get('date');
+      const downloadButton = document.getElementById('download-btn');
 
-      if (order) {
-        document.getElementById('order-display').textContent = order;
+      function showDeliveryDate(value){
+        let date = value ? new Date(value) : new Date();
+        if (Number.isNaN(date.getTime())) date = new Date();
+        const cells = document.querySelectorAll('.bali-film-meta > span');
+        if (cells.length >= 4) {
+          cells[1].textContent = String(date.getFullYear());
+          cells[2].textContent = date.toLocaleString('en-US',{month:'long'}).toUpperCase();
+          cells[3].textContent = String(date.getDate()).padStart(2,'0');
+        }
       }
-      const notes = params.get('notes');
-      if (notes) {
-        const notesEl = document.getElementById('order-notes-display');
-        notesEl.innerHTML = `<span style="display:block; padding:12px 16px; margin-bottom:16px; background:#161616; border-left:2px solid #444; border-radius:1px; font-style:normal; font-size:14px; color:var(--off-white); line-height:1.7;">📋 <strong>Order Note:</strong> ${notes}</span>`;
+      function showNotes(notes){
+        if (!notes) return;
+        const host = document.getElementById('order-notes-display');
+        if (!host) return;
+        const note = document.createElement('span');
+        note.style.cssText = 'display:block;padding:12px 16px;margin-bottom:16px;background:#161616;border-left:2px solid #444;border-radius:1px;font-style:normal;font-size:14px;color:var(--off-white);line-height:1.7;';
+        const label = document.createElement('strong');
+        label.textContent = 'Order Note: ';
+        note.append('📋 ', label, String(notes));
+        host.replaceChildren(note);
       }
-      if (name) {
-        document.querySelector('.ready-name').textContent = name;
+      function applyOrder(data){
+        const displayName = data.deliveryName || data.customerName || name;
+        if (displayName) document.querySelector('.ready-name').textContent = displayName;
+        if (data.film && !film) document.querySelector('.ready-sub').textContent = data.film;
+        if (data.driveLink) downloadButton.href = data.driveLink;
+        if (data.notes && !notesFromUrl) showNotes(data.notes);
+        if (data.deliveryDate) showDeliveryDate(data.deliveryDate);
+        if (data.deliveryTheme) document.body.dataset.theme = data.deliveryTheme;
       }
-      if (film) {
-        document.querySelector('.ready-sub').textContent = film;
-      }
-      if (link) {
-        document.querySelector('.btn-download').href = decodeURIComponent(link);
-      }
+
+      showDeliveryDate(deliveryDate);
+      if (order) document.getElementById('order-display').textContent = order;
+      if (name) document.querySelector('.ready-name').textContent = name;
+      if (film) document.querySelector('.ready-sub').textContent = film;
+      if (link) downloadButton.href = link;
+      if (notesFromUrl) showNotes(notesFromUrl);
+
+      if (order) fetch(`${SHEETS_API}?action=getOrder&order=${encodeURIComponent(order)}&_=${Date.now()}`,{cache:'no-store'})
+        .then(response => response.json()).then(data => { if (data && !data.error) applyOrder(data); }).catch(() => {});
     })();
   </script>
 
