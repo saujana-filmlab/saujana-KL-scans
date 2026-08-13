@@ -429,13 +429,13 @@ html[data-delivery-theme="bali"] .message-block strong {
   font-weight: 800;
 }
 
-html[data-delivery-theme="bali"] .message-block::before {
-  content: "LAB NOTE / KUALA LUMPUR";
+html[data-delivery-theme="bali"] .lab-note-label {
   display: block;
   margin-bottom: 22px;
   color: var(--bali-muted);
   font: 700 9px/1 "Courier New", monospace;
   letter-spacing: .2em;
+  text-transform: uppercase;
 }
 
 html[data-delivery-theme="bali"] .info-label,
