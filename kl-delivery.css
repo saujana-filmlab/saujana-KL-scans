@@ -1,7 +1,7 @@
 /*
   Saujana KL delivery presentation, derived from the Bali delivery system.
   It is enabled through ?theme=bali so existing Bali-compatible links and
-  colour/B&W/classic negative palettes retain the same behavior.
+  Saujana Green/Color Negative/Classic palettes retain the same behavior.
 */
 
 .theme-preview-switch { display: none; }
@@ -44,16 +44,16 @@ html[data-delivery-theme="bali"][data-negative="bw"] {
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] {
-  --bali-ink: #0a0b0c;
-  --bali-surface: #111315;
-  --bali-surface-raised: #181b1e;
-  --bali-line: rgba(199, 159, 84, .21);
-  --bali-accent: #c9a15c;
-  --bali-accent-soft: #987846;
-  --bali-paper: #ece7db;
-  --bali-copy: #bab5aa;
-  --bali-muted: #716e68;
-  --bali-grain: .04;
+  --bali-ink: #fff;
+  --bali-surface: #fff;
+  --bali-surface-raised: #f1faf5;
+  --bali-line: rgba(2, 201, 109, .26);
+  --bali-accent: #02c96d;
+  --bali-accent-soft: #00a95b;
+  --bali-paper: #075b35;
+  --bali-copy: #2f7354;
+  --bali-muted: #6f9a83;
+  --bali-grain: .025;
 }
 
 html[data-delivery-theme="bali"] body {
@@ -69,6 +69,17 @@ html[data-delivery-theme="bali"] body {
 html[data-delivery-theme="bali"] body::before {
   opacity: var(--bali-grain);
   mix-blend-mode: screen;
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] body {
+  background:
+    radial-gradient(circle, rgba(2, 201, 109, .16) 0 1px, transparent 1.2px) 0 0 / 16px 16px,
+    radial-gradient(circle at 14% 4%, rgba(2, 201, 109, .1), transparent 28rem),
+    linear-gradient(180deg, #fff 0, #f8fcfa 72rem);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] body::before {
+  mix-blend-mode: multiply;
 }
 
 html[data-delivery-theme="bali"][data-theme-preview="true"] .theme-preview-switch {
@@ -104,9 +115,9 @@ html[data-delivery-theme="bali"] .theme-preview-switch a {
   text-transform: uppercase;
 }
 
-html[data-delivery-theme="bali"][data-negative="colour"] .theme-preview-switch a:first-of-type,
-html[data-delivery-theme="bali"][data-negative="bw"] .theme-preview-switch a:nth-of-type(2),
-html[data-delivery-theme="bali"][data-negative="classic"] .theme-preview-switch a:nth-of-type(3) {
+html[data-delivery-theme="bali"][data-negative="classic"] .theme-preview-switch a:first-of-type,
+html[data-delivery-theme="bali"][data-negative="colour"] .theme-preview-switch a:nth-of-type(2),
+html[data-delivery-theme="bali"][data-negative="bw"] .theme-preview-switch a:nth-of-type(3) {
   color: var(--bali-ink);
   background: var(--bali-accent);
 }
@@ -125,7 +136,13 @@ html[data-delivery-theme="bali"][data-negative="bw"] .sprocket-strip {
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-strip {
-  background: linear-gradient(180deg, #222427, #151719);
+  background: linear-gradient(180deg, #edfff6, #dff8eb);
+  border-color: var(--bali-line);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-hole {
+  background: var(--bali-accent);
+  opacity: .9;
 }
 
 html[data-delivery-theme="bali"] .sprocket-hole {
@@ -151,11 +168,11 @@ html[data-delivery-theme="bali"] .frame-counter::before {
 }
 
 html[data-delivery-theme="bali"][data-negative="bw"] .frame-counter::before {
-  content: "B&W NEGATIVE  ·  36 ▶  ·  ";
+  content: "SAUJANA CLASSIC  ·  FRAME 36  ·  ";
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .frame-counter::before {
-  content: "SAUJANA CLASSIC  ·  FRAME 36  ·  ";
+  content: "SAUJANA GREEN  ·  FRAME 36  ·  ";
 }
 
 /* Website-style film metadata rail used by the Bali preview header. */
@@ -236,7 +253,7 @@ html[data-delivery-theme="bali"][data-negative="bw"] .bali-process-label::before
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .bali-negative-label::before {
-  content: "CLASSIC NEGATIVE";
+  content: "GRAIN BRAIN";
 }
 
 html[data-delivery-theme="bali"] .bali-negative-label::before,
@@ -298,6 +315,16 @@ html[data-delivery-theme="bali"] .bali-header-services {
 html[data-delivery-theme="bali"] .bali-header-services span {
   padding: 0 .55em;
   color: var(--bali-muted);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .header {
+  min-height: 255px;
+  padding: 56px 0 36px;
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .bali-header-services {
+  position: static;
+  margin-top: 26px;
 }
 
 html[data-delivery-theme="bali"] .ready-card {
@@ -398,7 +425,24 @@ html[data-delivery-theme="bali"][data-negative="bw"] .action-card {
 html[data-delivery-theme="bali"][data-negative="classic"] .notice,
 html[data-delivery-theme="bali"][data-negative="classic"] .message-block,
 html[data-delivery-theme="bali"][data-negative="classic"] .action-card {
-  background: rgba(18, 20, 22, .8);
+  background: rgba(255, 255, 255, .84);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .btn-download::before {
+  background: var(--bali-accent-soft);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .button-image-icon {
+  filter: brightness(0) invert(1);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-strip-top::after,
+html[data-delivery-theme="bali"][data-negative="classic"] .bali-footer-perforation {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--bali-accent) 0 20px,
+    transparent 20px 38px
+  );
 }
 
 html[data-delivery-theme="bali"] .notice {
@@ -409,6 +453,10 @@ html[data-delivery-theme="bali"] .notice p,
 html[data-delivery-theme="bali"] .message-block,
 html[data-delivery-theme="bali"] .action-card {
   color: var(--bali-copy);
+}
+
+html[data-delivery-theme="bali"] .notice p strong {
+  color: var(--bali-paper);
 }
 
 html[data-delivery-theme="bali"] .message-block {
@@ -501,6 +549,10 @@ html[data-delivery-theme="bali"] .action-card:hover {
 
 html[data-delivery-theme="bali"] .action-card:hover .action-icon {
   background: var(--bali-paper);
+}
+
+html[data-delivery-theme="bali"][data-negative="classic"] .action-card:hover .theme-action-icon {
+  filter: brightness(0) invert(1);
 }
 
 html[data-delivery-theme="bali"] .action-card:hover .action-title,
@@ -857,5 +909,23 @@ html[data-delivery-theme="bali"] .bali-footer-panel a:hover {
 
   html[data-delivery-theme="bali"] .bali-footer-dots {
     display: none;
+  }
+
+  html[data-delivery-theme="bali"][data-negative="classic"] .header {
+    min-height: 245px;
+    padding: 50px 0 32px;
+  }
+
+  html[data-delivery-theme="bali"][data-negative="classic"] .bali-header-services {
+    margin-top: 22px;
+  }
+
+  html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-strip-top::after,
+  html[data-delivery-theme="bali"][data-negative="classic"] .bali-footer-perforation {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--bali-accent) 0 14px,
+      transparent 14px 25px
+    );
   }
 }
