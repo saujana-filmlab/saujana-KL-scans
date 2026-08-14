@@ -27,7 +27,7 @@
       document.documentElement.dataset.deliveryTheme = 'bali';
       const requestedTheme = previewParams.get('negative');
       document.documentElement.dataset.negative =
-        requestedTheme === 'bw' || requestedTheme === 'classic' ? requestedTheme : 'colour';
+        requestedTheme === 'colour' || requestedTheme === 'bw' ? requestedTheme : 'classic';
       if (previewParams.get('preview') === '1') {
         document.documentElement.dataset.themePreview = 'true';
       }
@@ -477,17 +477,17 @@
     </filter>
     <filter id="logo-classic-tint" color-interpolation-filters="sRGB">
       <feColorMatrix type="matrix" values="
+        0 0 0 0 0.007843
         0 0 0 0 0.788235
-        0 0 0 0 0.631373
-        0 0 0 0 0.360784
+        0 0 0 0 0.427451
         0 0 0 1 0" />
     </filter>
   </svg>
   <nav class="theme-preview-switch" aria-label="Delivery theme preview">
-    <span>Negative preview</span>
-    <a href="?theme=bali&negative=colour&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Colour</a>
-    <a href="?theme=bali&negative=bw&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kentmere%20400%20%C3%97%206&link=%23&sheets=0">B&amp;W</a>
-    <a href="?theme=bali&negative=classic&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Classic</a>
+    <span>Delivery theme</span>
+    <a href="?theme=bali&negative=classic&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Saujana Green</a>
+    <a href="?theme=bali&negative=colour&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kodak%20Ultramax%20400%20%C3%97%206&link=%23&sheets=0">Color Negative</a>
+    <a href="?theme=bali&negative=bw&date=2026-07-31&order=0000065&name=Ivan%20Y.&film=Kentmere%20400%20%C3%97%206&link=%23&sheets=0">Classic</a>
   </nav>
 
   <!-- top film strip -->
@@ -542,7 +542,7 @@
       <div class="download-wrap">
         <a href="#" class="btn-download" target="_blank" rel="noopener" id="download-btn">
           <img class="button-image-icon" src="icon-full-download.png" alt="" aria-hidden="true" />
-          <span>Download Full-Resolution Scans</span>
+          <span>Download Your Scans Here</span>
         </a>
       </div>
     </div>
