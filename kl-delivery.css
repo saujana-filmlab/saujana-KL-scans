@@ -31,16 +31,16 @@ html[data-delivery-theme="bali"] {
 }
 
 html[data-delivery-theme="bali"][data-negative="bw"] {
-  --bali-ink: #090909;
-  --bali-surface: #111;
-  --bali-surface-raised: #171717;
-  --bali-line: rgba(238, 238, 232, .22);
-  --bali-accent: #eeeae2;
-  --bali-accent-soft: #b9b8b3;
-  --bali-paper: #f3f1eb;
-  --bali-copy: #c4c3be;
-  --bali-muted: #777671;
-  --bali-grain: .055;
+  --bali-ink: #0a0b0c;
+  --bali-surface: #111315;
+  --bali-surface-raised: #181b1e;
+  --bali-line: rgba(199, 159, 84, .21);
+  --bali-accent: #c9a15c;
+  --bali-accent-soft: #987846;
+  --bali-paper: #ece7db;
+  --bali-copy: #bab5aa;
+  --bali-muted: #716e68;
+  --bali-grain: .04;
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] {
@@ -132,7 +132,7 @@ html[data-delivery-theme="bali"] .sprocket-strip {
 }
 
 html[data-delivery-theme="bali"][data-negative="bw"] .sprocket-strip {
-  background: linear-gradient(180deg, #222, #151515);
+  background: linear-gradient(180deg, #222427, #151719);
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-strip {
@@ -294,7 +294,7 @@ html[data-delivery-theme="bali"] .logo-wrap img {
 }
 
 html[data-delivery-theme="bali"][data-negative="bw"] .logo-wrap img {
-  filter: none;
+  filter: url("#logo-bali-classic-tint");
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .logo-wrap img {
@@ -419,7 +419,7 @@ html[data-delivery-theme="bali"] .action-card {
 html[data-delivery-theme="bali"][data-negative="bw"] .notice,
 html[data-delivery-theme="bali"][data-negative="bw"] .message-block,
 html[data-delivery-theme="bali"][data-negative="bw"] .action-card {
-  background: rgba(16, 16, 16, .72);
+  background: rgba(18, 20, 22, .8);
 }
 
 html[data-delivery-theme="bali"][data-negative="classic"] .notice,
@@ -806,13 +806,17 @@ html[data-delivery-theme="bali"] .bali-footer-panel a:hover {
 
   html[data-delivery-theme="bali"] .header {
     display: block;
-    min-height: 300px;
-    padding: 60px 0 42px;
+    min-height: 0;
+    padding: 42px 0 38px;
   }
 
   html[data-delivery-theme="bali"] .bali-header-meta {
-    top: 105px;
+    position: static;
+    top: auto;
+    right: auto;
+    margin: 0 0 20px;
     font-size: 8px;
+    line-height: 1.4;
   }
 
   html[data-delivery-theme="bali"] .logo-wrap img {
@@ -820,8 +824,10 @@ html[data-delivery-theme="bali"] .bali-footer-panel a:hover {
   }
 
   html[data-delivery-theme="bali"] .bali-header-services {
-    bottom: 38px;
-    max-width: 320px;
+    position: static;
+    bottom: auto;
+    max-width: none;
+    margin-top: 24px;
     font-size: 8px;
   }
 
@@ -912,12 +918,12 @@ html[data-delivery-theme="bali"] .bali-footer-panel a:hover {
   }
 
   html[data-delivery-theme="bali"][data-negative="classic"] .header {
-    min-height: 245px;
-    padding: 50px 0 32px;
+    min-height: 0;
+    padding: 42px 0 38px;
   }
 
   html[data-delivery-theme="bali"][data-negative="classic"] .bali-header-services {
-    margin-top: 22px;
+    margin-top: 24px;
   }
 
   html[data-delivery-theme="bali"][data-negative="classic"] .sprocket-strip-top::after,
