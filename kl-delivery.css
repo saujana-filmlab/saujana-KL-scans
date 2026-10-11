@@ -391,6 +391,40 @@ html[data-delivery-theme="bali"] .download-wrap {
   margin-top: 42px;
 }
 
+html[data-delivery-theme="bali"] .negatives-note[hidden],
+html[data-delivery-theme="bali"] #legacy-negatives-notice[hidden] {
+  display: none;
+}
+
+html[data-delivery-theme="bali"] .negatives-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 18px;
+  padding: 17px 18px;
+  border: 1px solid var(--bali-line);
+  background: var(--bali-surface-raised);
+  color: var(--bali-copy);
+  font: 13px/1.55 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[data-delivery-theme="bali"] .negatives-frame {
+  flex: none;
+  color: var(--bali-accent);
+  font: 24px/1 "Courier New", monospace;
+}
+
+html[data-delivery-theme="bali"] .negatives-note strong {
+  display: block;
+  color: var(--bali-paper);
+  font: 700 11px/1.4 "Courier New", monospace;
+  letter-spacing: .1em;
+}
+
+html[data-delivery-theme="bali"] .negatives-note p {
+  margin: 7px 0 0;
+}
+
 html[data-delivery-theme="bali"] .btn-download {
   min-height: 66px;
   background: var(--bali-accent);

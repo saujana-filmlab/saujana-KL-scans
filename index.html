@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
   <title>Your Scans are Ready — Saujana Film Lab KL</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- WhatsApp / Social Media Preview Tags -->
@@ -14,7 +15,6 @@
   <meta property="og:image:width" content="500" />
   <meta property="og:image:height" content="500" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://scans.saujanalab.com/" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Your scans are done! 🎞️" />
@@ -552,6 +552,10 @@
           <span>Download Your Scans Here</span>
         </a>
       </div>
+      <div class="negatives-note" id="negatives-note" hidden>
+        <span class="negatives-frame" aria-hidden="true">▣</span>
+        <div><strong id="negatives-heading"></strong><p id="negatives-copy"></p></div>
+      </div>
     </div>
 
     <!-- notice -->
@@ -559,7 +563,7 @@
       <span class="notice-icon">⏳</span>
       <p>
         <strong>Your download link is active for 7 days.</strong> Please save your scans before then.
-        Need us to hold onto your negatives? We store them for up to <strong>1 month upon request</strong> — just let us know.
+        <span id="legacy-negatives-notice">Need us to hold onto your negatives? We store them for up to <strong>1 month upon request</strong> — just let us know.</span>
       </p>
     </div>
 
@@ -702,15 +706,34 @@
 
     <script>
     const SHEETS_API = "https://script.google.com/macros/s/AKfycbxZAdLKdlzAlkrZPhfaW3LrEKmsRHI2QEKQ4asbsGu-hBO7RSfLLTjjk6K9VwERFprY/exec";
+    const KL_ENGINE = "https://grain-brain-kl-engine-staging.edue-christian.workers.dev";
     (function(){
       const params = new URLSearchParams(location.search);
+      const token = params.get('token');
       const order = String(params.get('order') || '').trim();
       const name = params.get('name');
       const film = params.get('film');
       const link = params.get('link');
       const notesFromUrl = params.get('notes');
       const deliveryDate = params.get('date');
+      const requestedCollection = String(params.get('collectNegatives') || '').toLowerCase();
       const downloadButton = document.getElementById('download-btn');
+
+      function showCollection(choice){
+        const note=document.getElementById('negatives-note');
+        const legacy=document.getElementById('legacy-negatives-notice');
+        const content=choice==='yes'
+          ? ['YOUR NEGATIVES ARE WAITING','We’ll keep them at the lab for 7 days from the day this link lands in your inbox. Swing by with your order number when you’re ready.']
+          : choice==='no'
+          ? ['JUST HERE FOR THE SCANS?','You chose not to collect the negatives for this order. No extra trip to the lab, your photos are right here.']
+          : null;
+        note.hidden=!content;
+        legacy.hidden=!!content;
+        if (content) {
+          document.getElementById('negatives-heading').textContent=content[0];
+          document.getElementById('negatives-copy').textContent=content[1];
+        }
+      }
 
       function showDeliveryDate(value){
         let date = value ? new Date(value) : new Date();
@@ -734,23 +757,42 @@
         host.replaceChildren(note);
       }
       function applyOrder(data){
+        if (data.orderNumber) document.getElementById('order-display').textContent = data.orderNumber;
         const displayName = data.deliveryName || data.customerName || name;
         if (displayName) document.querySelector('.ready-name').textContent = displayName;
-        if (data.film && !film) document.querySelector('.ready-sub').textContent = data.film;
+        if (data.film && (token || !film)) document.querySelector('.ready-sub').textContent = data.film;
         if (data.driveLink) downloadButton.href = data.driveLink;
-        if (data.notes && !notesFromUrl) showNotes(data.notes);
+        if (data.notes && (token || !notesFromUrl)) showNotes(data.notes);
         if (data.deliveryDate) showDeliveryDate(data.deliveryDate);
-        if (data.deliveryTheme) document.body.dataset.theme = data.deliveryTheme;
+        if (data.deliveryTheme) {
+          document.body.dataset.theme = data.deliveryTheme;
+          document.documentElement.dataset.negative = data.deliveryTheme === 'colour' || data.deliveryTheme === 'bw' ? data.deliveryTheme : 'classic';
+        }
+        if (token && ['yes','no'].includes(requestedCollection)) showCollection(data.collectNegatives);
       }
 
-      showDeliveryDate(deliveryDate);
-      if (order) document.getElementById('order-display').textContent = order;
-      if (name) document.querySelector('.ready-name').textContent = name;
-      if (film) document.querySelector('.ready-sub').textContent = film;
-      if (link) downloadButton.href = link;
-      if (notesFromUrl) showNotes(notesFromUrl);
+      if (!token) {
+        if (['yes','no'].includes(requestedCollection)) showCollection(requestedCollection);
+        showDeliveryDate(deliveryDate);
+        if (order) document.getElementById('order-display').textContent = order;
+        if (name) document.querySelector('.ready-name').textContent = name;
+        if (film) document.querySelector('.ready-sub').textContent = film;
+        if (link) downloadButton.href = link;
+        if (notesFromUrl) showNotes(notesFromUrl);
+      }
 
-      if (order) fetch(`${SHEETS_API}?action=getOrder&order=${encodeURIComponent(order)}&_=${Date.now()}`,{cache:'no-store'})
+      if (token) {
+        downloadButton.removeAttribute('href');
+        if (['yes','no'].includes(requestedCollection)) document.getElementById('legacy-negatives-notice').hidden = true;
+        fetch(`${KL_ENGINE}/delivery?token=${encodeURIComponent(token)}`,{cache:'no-store'})
+          .then(async response => {const data=await response.json();if(!response.ok)throw new Error(data.error||'Delivery link unavailable');return data;})
+          .then(applyOrder)
+          .catch(error => {
+            document.querySelector('.ready-name').textContent = 'LINK UNAVAILABLE';
+            document.querySelector('.ready-sub').textContent = error.message || 'Please contact the lab for a fresh link.';
+            downloadButton.removeAttribute('href');
+          });
+      } else if (order) fetch(`${SHEETS_API}?action=getOrder&order=${encodeURIComponent(order)}&_=${Date.now()}`,{cache:'no-store'})
         .then(response => response.json()).then(data => { if (data && !data.error) applyOrder(data); }).catch(() => {});
     })();
   </script>
