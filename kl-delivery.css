@@ -286,19 +286,27 @@ html[data-delivery-theme="bali"] .bali-header-meta {
 
 html[data-delivery-theme="bali"] .logo-wrap {
   margin: 0;
+  position: relative;
 }
 
 html[data-delivery-theme="bali"] .logo-wrap img {
   width: 326px;
-  filter: url("#logo-colour-tint");
 }
 
-html[data-delivery-theme="bali"][data-negative="bw"] .logo-wrap img {
-  filter: url("#logo-bali-classic-tint");
-}
+@supports ((-webkit-mask-image: url("saujana-logo.png")) or (mask-image: url("saujana-logo.png"))) {
+  html[data-delivery-theme="bali"] .logo-wrap img {
+    opacity: 0;
+  }
 
-html[data-delivery-theme="bali"][data-negative="classic"] .logo-wrap img {
-  filter: url("#logo-classic-tint");
+  html[data-delivery-theme="bali"] .logo-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--bali-accent);
+    -webkit-mask: url("saujana-logo.png") center / contain no-repeat;
+    mask: url("saujana-logo.png") center / contain no-repeat;
+    pointer-events: none;
+  }
 }
 
 html[data-delivery-theme="bali"] .bali-header-services {
