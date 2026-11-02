@@ -756,7 +756,7 @@
         note.append('📋 ', label, String(notes));
         host.replaceChildren(note);
       }
-      function applyOrder(data){
+      function applyOrder(data){ window.GB_DELIVERY_DATA=data;window.dispatchEvent(new CustomEvent("gb-delivery-order",{detail:data}));
         if (data.orderNumber) document.getElementById('order-display').textContent = data.orderNumber;
         const displayName = data.deliveryName || data.customerName || name;
         if (displayName) document.querySelector('.ready-name').textContent = displayName;
@@ -797,5 +797,5 @@
     })();
   </script>
 
-</body>
+<script>window.GB_CONTACT_SHEET_API=KL_ENGINE;</script><script src="fflate.js"></script><script src="contact-sheet-download.js"></script><script src="customer-sheets.js"></script></body>
 </html>
