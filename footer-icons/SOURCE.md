@@ -1,0 +1,1 @@
+Footer artwork: Simple Icons 11.15.0, https://www.npmjs.com/package/simple-icons/v/11.15.0 . Exact SVG paths bundled locally after the former Iconify endpoints returned HTTP 404. No replacement logo artwork was generated. Existing CSS controls icon size and theme/hover styling.
