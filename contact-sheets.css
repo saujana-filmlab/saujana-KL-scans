@@ -1,0 +1,115 @@
+/* Exact Bali production viewer geometry. KL palettes remain in kl-delivery.css. */
+    .contact-sheets { margin-top: 36px; padding-top: 28px; border-top: 1px solid #242424; }
+    .contact-sheets.is-loading { min-height: 280px; }
+    .contact-loading-state {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 36px 24px;
+      background: #090909;
+      border: 1px solid #242424;
+      text-align: center;
+    }
+    .contact-loading-state[hidden], .contact-stage[hidden] { display: none; }
+    .contact-loading-mark {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 7px;
+      border: 2px solid #343434;
+      border-top-color: #d19a2a;
+      border-radius: 50%;
+      animation: contact-loading-spin .9s linear infinite;
+    }
+    .contact-loading-state strong {
+      color: var(--off-white);
+      font: 500 11px 'Montserrat',sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .contact-loading-state span {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .06em;
+    }
+    @keyframes contact-loading-spin { to { transform: rotate(360deg); } }
+    .contact-stage { position: relative; padding: 8px; background: #090909; border: 1px solid #242424; }
+    .contact-slide { display: none; text-align: left; }
+    .contact-slide.active { display: block; }
+    .contact-slide > img { display: block; width: 100%; height: auto; }
+    .contact-stage[data-format="portrait"] .contact-slide > img { width: min(100%, 440px); margin: 0 auto; }
+    .contact-caption { display: flex; justify-content: space-between; gap: 16px; padding: 11px 3px 3px; color: var(--muted); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+    .contact-caption strong { color: var(--light); font-weight: 500; }
+    .contact-tools { display: grid; gap: 8px; margin: 12px 0 0; }
+    .contact-format-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .contact-format-button { min-height: 42px; background: #101010; border: 1px solid #303030; color: var(--muted); font: 500 8px 'Montserrat',sans-serif; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: .22s ease; }
+    .contact-format-button:hover,
+    .contact-format-button.active { border-color: #d19a2a; color: #0a0a0a; background: #d19a2a; }
+    .contact-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .contact-button { display: flex; align-items: center; justify-content: center; gap: 11px; min-height: 50px; padding: 11px 9px; background: linear-gradient(180deg,#1b1b1b,#131313); border: 1px solid #303030; color: var(--light); font: 500 8px 'Montserrat',sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: .22s ease; }
+    .contact-button:hover { transform: translateY(-2px); border-color: #7a5a24; color: var(--white); }
+    .contact-button img { filter: invert(1); }
+    .contact-nav { position: absolute; top: 42%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: 1px solid #505050; background: rgba(12,12,12,.88); color: var(--white); font: 24px 'Cormorant Garamond',serif; cursor: pointer; }
+    .contact-nav:hover { background: #d19a2a; border-color: #d19a2a; color: #0a0a0a; }
+    .contact-prev { left: 14px; } .contact-next { right: 14px; }
+    .contact-dots { display: flex; justify-content: center; gap: 7px; margin-top: 12px; }
+    .contact-dot { width: 6px; height: 6px; border: 0; border-radius: 50%; background: #444; padding: 0; cursor: pointer; }
+    .contact-dot.active { background: var(--off-white); }
+    @media (max-width: 520px) {
+      .ready-card { padding: 40px 24px; }
+      .contact-actions { grid-template-columns: 1fr; }
+      .contact-caption { display: block; }
+      .contact-caption span { display: block; margin-top: 5px; }
+    }
+html[data-delivery-theme="bali"] .contact-sheets {
+  margin-top: 48px;
+  padding-top: 38px;
+  border-color: var(--bali-line);
+}
+
+html[data-delivery-theme="bali"] .contact-stage,
+html[data-delivery-theme="bali"] .contact-loading-state {
+  padding: 10px;
+  background: #050505;
+  border-color: var(--bali-line);
+}
+
+html[data-delivery-theme="bali"] .contact-loading-mark {
+  border-color: rgba(255, 255, 255, .12);
+  border-top-color: var(--bali-accent);
+}
+
+html[data-delivery-theme="bali"] .contact-loading-state strong,
+html[data-delivery-theme="bali"] .contact-caption strong {
+  color: var(--bali-accent);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[data-delivery-theme="bali"] .contact-caption {
+  color: var(--bali-muted);
+  font-family: "Courier New", monospace;
+}
+
+html[data-delivery-theme="bali"] .contact-button {
+  background: var(--bali-surface-raised);
+  border-color: var(--bali-line);
+  color: var(--bali-paper);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[data-delivery-theme="bali"] .contact-button:hover {
+  border-color: var(--bali-accent);
+}
+
+html[data-delivery-theme="bali"] .contact-nav:hover {
+  background: var(--bali-accent);
+  border-color: var(--bali-accent);
+}
+
+
+.contact-nav[hidden],.contact-dots[hidden]{display:none!important}
+.logo-wrap{max-width:100%}.logo-wrap img{max-width:100%}
+.contact-action-icon{display:block;width:24px;height:24px;flex:0 0 24px;background:currentColor;-webkit-mask:var(--contact-icon) center/contain no-repeat;mask:var(--contact-icon) center/contain no-repeat}
+@media(prefers-reduced-motion:reduce){.contact-stage *{transition:none!important;animation:none!important}}
